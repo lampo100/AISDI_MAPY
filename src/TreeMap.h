@@ -20,7 +20,9 @@ namespace aisdi {
 
 
         class ConstIterator;
-        class Node;
+
+        struct Node;
+
         class Iterator;
 
         using iterator = Iterator;
@@ -81,6 +83,12 @@ namespace aisdi {
             (void) key;
             throw std::runtime_error("TODO");
         }
+        void insert(const KeyType tkey, const ValueType tvalue){
+            if (!root){
+                root = new Node(tkey,tvalue);
+                if()
+            }
+        }
 
         void remove(const key_type &key) {
             (void) key;
@@ -128,16 +136,59 @@ namespace aisdi {
         const_iterator end() const {
             return cend();
         }
-    protected:
-        template<typename KeyType, typename ValueType>
-                class Node{
 
-                };
+    protected:
+        Node *root;
+        unsigned int count;
+
+        //Funkcje pomocnicze do drzewa AVL
+        unsigned char height(Node *pnode) {
+            return pnode ? pnode->height : (unsigned char) 0;
+        }
+        int bfactor(Node *pnode){
+            return height(pnode->right) - height(pnode->left);
+        }
+        void fixheight(Node *pnode){
+            unsigned char hl = height(pnode->left);
+            unsigned char hr = height(pnode->right);
+            pnode->height = ((hl>hr ? hl : hr) + (unsigned char) 1);
+        }
+        Node *rotateRight(Node *pnode){
+            Node *qnode = pnode->left;
+            pnode->left = qnode->right;
+            qnode->right = pnode;
+            fixheight(pnode);
+            fixheight(qnode);
+            return qnode;
+        }
+        Node *rotateLeft(Node *qnode){
+            Node *pnode = qnode->right;
+            qnode->right = pnode->left;
+            pnode->left = qnode;
+            fixheight(qnode);
+            fixheight(pnode);
+            return pnode;
+        }
+        Node *balance(Node *pnode){
+            fixheight(pnode);
+            if(bfactor(pnode) == 2){
+                if(bfactor(pnode->right) < 0)
+                    pnode->right = rotateRight(pnode->right);
+                return rotateLeft(pnode);
+            }
+            if(bfactor(pnode) == -2){
+                if(bfactor(pnode->left) > 0)
+                    pnode->left = rotateLeft(pnode->left);
+                return rotateRight(pnode);
+            }
+            return pnode;
+        }
     };
 
     template<typename KeyType, typename ValueType>
     class TreeMap<KeyType, ValueType>::ConstIterator {
     public:
+        friend <KeyType, ValueType> TreeMap;
         using reference = typename TreeMap::const_reference;
         using iterator_category = std::bidirectional_iterator_tag;
         using value_type = typename TreeMap::value_type;
@@ -225,6 +276,23 @@ namespace aisdi {
             // ugly cast, yet reduces code duplication.
             return const_cast<reference>(ConstIterator::operator*());
         }
+    };
+
+    template<typename KeyType, typename ValueType>
+    struct TreeMap<KeyType, ValueType>::Node {
+        Node(KeyType tkey, ValueType tvalue) {
+            NodeKey = tkey;
+            NodeValue = tvalue;
+            height = 1;
+            right = NULL;
+            left = NULL;
+        }
+
+        KeyType NodeKey;
+        ValueType NodeValue;
+        Node *right;
+        Node *left;
+        unsigned char height;
     };
 
 }
