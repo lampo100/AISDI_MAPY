@@ -5,6 +5,7 @@
 #include <initializer_list>
 #include <stdexcept>
 #include <utility>
+#include <iostream>
 
 namespace aisdi {
 
@@ -20,93 +21,111 @@ namespace aisdi {
 
 
         class ConstIterator;
-
         struct Node;
-
         class Iterator;
+
+        friend class ConstIterator;
+        friend class Node;
 
         using iterator = Iterator;
         using const_iterator = ConstIterator;
 
-        TreeMap() {}
+        TreeMap(): root(NULL), count(0) {}
 
-        TreeMap(std::initializer_list<value_type> list) {
-            (void) list; // disables "unused argument" warning, can be removed when method is implemented.
-            throw std::runtime_error("TODO");
+        TreeMap(std::initializer_list<value_type> list):TreeMap() {
+            for(auto i : list) insert(i.first, i.second);
         }
 
-        TreeMap(const TreeMap &other) {
-            (void) other;
-            throw std::runtime_error("TODO");
+        TreeMap(const TreeMap &other):TreeMap() {
+            for(auto i: other)insert(i.first, i.second);
         }
 
-        TreeMap(TreeMap &&other) {
-            (void) other;
-            throw std::runtime_error("TODO");
+        TreeMap(TreeMap &&other):TreeMap() {
+            root = other.root;
+            other.root = NULL;
+            count = other.count;
+            other.count = 0;
         }
 
         TreeMap &operator=(const TreeMap &other) {
-            (void) other;
-            throw std::runtime_error("TODO");
+            if(*this == other) return *this;
+            clean(root);
+            root = NULL;
+            count = 0;
+            for(auto i: other)insert(i.first, i.second);
+            return *this;
         }
 
         TreeMap &operator=(TreeMap &&other) {
-            (void) other;
-            throw std::runtime_error("TODO");
+            if(*this == other) return *this;
+            clean(root);
+            root = other.root;
+            other.root = NULL;
+            count = other.count;
+            other.count = 0;
+            return *this;
         }
 
         bool isEmpty() const {
-            throw std::runtime_error("TODO");
+            return !count;
         }
 
         mapped_type &operator[](const key_type &key) {
-            (void) key;
-            throw std::runtime_error("TODO");
+            Node *current = findNode(key);
+            if( !current ){
+                ValueType i;
+                insert(key, i);
+                current = findNode(key);
+                return current->NodePair.second;
+            }
+            return current->NodePair.second;
         }
 
         const mapped_type &valueOf(const key_type &key) const {
-            (void) key;
-            throw std::runtime_error("TODO");
+            Node *t = findNode(key);
+            if( !t ) throw std::out_of_range("There is no element of this key");
+            return t->NodePair.second;
         }
 
         mapped_type &valueOf(const key_type &key) {
-            (void) key;
-            throw std::runtime_error("TODO");
+            Node *t = findNode(key);
+            if( !t ) throw std::out_of_range("There is no element of this key");
+            return t->NodePair.second;
         }
 
         const_iterator find(const key_type &key) const {
-            (void) key;
-            throw std::runtime_error("TODO");
+            return ConstIterator(this,findNode(key));
         }
 
         iterator find(const key_type &key) {
-            (void) key;
-            throw std::runtime_error("TODO");
+            return Iterator(this,findNode(key));
         }
-        void insert(const KeyType tkey, const ValueType tvalue){
-            if (!root){
-                root = new Node(tkey,tvalue);
-                if()
-            }
+
+        void insert(KeyType tkey, ValueType tvalue){
+                root = insertToNode(root, tkey, tvalue);
+                count++;
+                return;
         }
 
         void remove(const key_type &key) {
-            (void) key;
-            throw std::runtime_error("TODO");
+            Node *temp = findNode(key);
+            if( !temp ) throw std::out_of_range("Obiekt o podanym kluczu nie istnieje.");
+            temp = removeNode(root, key);
+            root = temp;
+            count--;
         }
 
         void remove(const const_iterator &it) {
-            (void) it;
-            throw std::runtime_error("TODO");
+            if(it == end())throw std::out_of_range("Trying to erase end()");
+            remove(it.currentNode->NodePair.first);
         }
 
         size_type getSize() const {
-            throw std::runtime_error("TODO");
+            return count;
         }
 
         bool operator==(const TreeMap &other) const {
-            (void) other;
-            throw std::runtime_error("TODO");
+            return (root == other.root);
         }
 
         bool operator!=(const TreeMap &other) const {
@@ -114,19 +133,21 @@ namespace aisdi {
         }
 
         iterator begin() {
-            throw std::runtime_error("TODO");
+            if(count == 0) return Iterator(this, NULL);
+            return Iterator(this, findFirst(root));
         }
 
         iterator end() {
-            throw std::runtime_error("TODO");
+            return Iterator(this, NULL);
         }
 
         const_iterator cbegin() const {
-            throw std::runtime_error("TODO");
+            if(count == 0) return ConstIterator(this, NULL);
+            return ConstIterator(this, findFirst(root));
         }
 
         const_iterator cend() const {
-            throw std::runtime_error("TODO");
+            return ConstIterator(this, NULL);
         }
 
         const_iterator begin() const {
@@ -145,14 +166,17 @@ namespace aisdi {
         unsigned char height(Node *pnode) {
             return pnode ? pnode->height : (unsigned char) 0;
         }
+
         int bfactor(Node *pnode){
             return height(pnode->right) - height(pnode->left);
         }
+
         void fixheight(Node *pnode){
             unsigned char hl = height(pnode->left);
             unsigned char hr = height(pnode->right);
             pnode->height = ((hl>hr ? hl : hr) + (unsigned char) 1);
         }
+
         Node *rotateRight(Node *pnode){
             Node *qnode = pnode->left;
             pnode->left = qnode->right;
@@ -161,6 +185,7 @@ namespace aisdi {
             fixheight(qnode);
             return qnode;
         }
+
         Node *rotateLeft(Node *qnode){
             Node *pnode = qnode->right;
             qnode->right = pnode->left;
@@ -169,6 +194,7 @@ namespace aisdi {
             fixheight(pnode);
             return pnode;
         }
+
         Node *balance(Node *pnode){
             fixheight(pnode);
             if(bfactor(pnode) == 2){
@@ -183,42 +209,137 @@ namespace aisdi {
             }
             return pnode;
         }
+
+        Node *insertToNode(Node *pnode, const KeyType tkey, const ValueType tvalue){
+            if (!pnode)
+                return new Node(tkey, tvalue);
+            if(tkey < pnode->NodePair.first)
+                pnode->left = insertToNode(pnode->left, tkey, tvalue);
+            else
+                pnode->right = insertToNode(pnode->right, tkey, tvalue);
+            return balance(pnode);
+        }
+
+        Node *findMinNode(Node *pnode)const{
+            return pnode->left ? findMinNode(pnode->left) : pnode;
+        }
+
+        Node *removeMinNode(Node *pnode){
+            if( pnode->left == NULL)
+                return pnode->right;
+            pnode->left = removeMinNode(pnode->left);
+            return balance(pnode);
+        }
+
+        Node *removeNode(Node *pnode, KeyType tkey){
+            if ( !pnode ) return NULL;
+            if( tkey < pnode->NodePair.first )
+                pnode->left = removeNode(pnode->left, tkey);
+            else if(tkey > pnode->NodePair.first )
+                pnode->right = removeNode(pnode->right, tkey);
+            else{
+                Node *qnode = pnode->left;
+                Node *rnode = pnode->right;
+                delete pnode;
+                if( !rnode ) return qnode;
+                Node *min = findMinNode(rnode);
+                min->right = removeMinNode(rnode);
+                min->left = qnode;
+                return balance(min);
+            }
+            return balance(pnode);
+        }
+
+        Node *findNodeAt(Node *pnode, KeyType tkey)const{
+            if( !pnode ) return NULL;
+            if(tkey < pnode->NodePair.first ) pnode = findNodeAt(pnode->left, tkey);
+            else if(tkey > pnode->NodePair.first ) pnode = findNodeAt(pnode->right, tkey);
+            return pnode;
+        }
+
+        Node *findNode(KeyType tkey)const{
+            return findNodeAt(root, tkey);
+        }
+
+        //Zakładamy przechodzenie po drzewie in-order(Left->Parent->Right)
+        Node *findLast() const{
+            Node *last = NULL;
+            TraverseInOrder(root, last);
+            return last;
+        }
+        Node *findFirst(Node *pnode) const{
+            return pnode->left ? findFirst(pnode->left) : pnode;
+        }
+
+        //Funkcja przechodząca po drzewie in-order(Left->Parent->Right)
+        void TraverseInOrder(Node *p, Node* &t)const{
+            if ( !p ) return;
+            TraverseInOrder(p->left, t);
+            t = p;
+            TraverseInOrder(p->right, t);
+        }
+
+        void clean(Node *p){
+            if ( !p ) return;
+            clean(p->left);
+            clean(p->right);
+            delete p;
+        }
     };
 
     template<typename KeyType, typename ValueType>
     class TreeMap<KeyType, ValueType>::ConstIterator {
     public:
-        friend <KeyType, ValueType> TreeMap;
+        friend class TreeMap;
         using reference = typename TreeMap::const_reference;
         using iterator_category = std::bidirectional_iterator_tag;
         using value_type = typename TreeMap::value_type;
         using pointer = const typename TreeMap::value_type *;
 
-        explicit ConstIterator() {}
-
-        ConstIterator(const ConstIterator &other) {
-            (void) other;
-            throw std::runtime_error("TODO");
+        explicit ConstIterator(const TreeMap *tta, Node *cnode){
+            ttree = tta;
+            currentNode = cnode;
         }
 
+        ConstIterator(const ConstIterator &other):ConstIterator(other.ttree, other.currentNode) {}
+
         ConstIterator &operator++() {
-            throw std::runtime_error("TODO");
+            if( !currentNode ) throw std::out_of_range("Trying to increment end() iterator.");
+            else{
+                currentNode = inOrderSuccessor(currentNode);
+                return *this;
+            }
         }
 
         ConstIterator operator++(int) {
-            throw std::runtime_error("TODO");
+            if( !currentNode ) throw std::out_of_range("Trying to increment end() iterator.");
+            else{
+                ConstIterator result(this->ttree, this->currentNode);
+                currentNode = inOrderSuccessor(currentNode);
+                return result;
+            }
         }
 
         ConstIterator &operator--() {
-            throw std::runtime_error("TODO");
+            Node *temp;
+            temp = inOrderPredeccessor(currentNode);
+            if( !temp ) throw std::out_of_range("Trying to decrement begin() operator.");
+            currentNode = temp;
+            return *this;
         }
 
         ConstIterator operator--(int) {
-            throw std::runtime_error("TODO");
+            Node *temp;
+            ConstIterator result(this->ttree, this->currentNode);
+            temp = inOrderPredeccessor(currentNode);
+            if( !temp ) throw std::out_of_range("Trying to decrement begin() operator.");
+            currentNode = temp;
+            return result;
         }
 
         reference operator*() const {
-            throw std::runtime_error("TODO");
+            if(!currentNode) throw std::out_of_range("Trying to dereference end() iterator.");
+            return (currentNode->NodePair);
         }
 
         pointer operator->() const {
@@ -226,12 +347,70 @@ namespace aisdi {
         }
 
         bool operator==(const ConstIterator &other) const {
-            (void) other;
-            throw std::runtime_error("TODO");
+            return ((this->ttree == other.ttree)&&(this->currentNode == other.currentNode));
         }
 
         bool operator!=(const ConstIterator &other) const {
             return !(*this == other);
+        }
+    protected:
+        const TreeMap *ttree;
+        Node *currentNode;
+        Node *findMinNode(Node *pnode){
+            return pnode->left ? findMinNode(pnode->left) : pnode;
+        }
+        Node *inOrderSuccessor(Node *n)
+        {
+            Node *root = ttree->root;
+            // Prawa gałąź nie jest pusta
+            if( n->right != NULL )
+                return findMinNode(n->right);
+            Node *succ = NULL;
+
+            // W innym przypadku
+            while (root != NULL)
+            {
+                if (n->NodePair.first < root->NodePair.first)
+                {
+                    succ = root;
+                    root = root->left;
+                }
+                else if (n->NodePair.first > root->NodePair.first)
+                    root = root->right;
+                else
+                    break;
+            }
+            return succ;
+        }
+        Node *inOrderPredeccessor(Node *n) {
+            Node *root = ttree->root;
+            //Drzewo jest puste
+            if( !root ) return NULL;
+            //Dekrementujemy end()
+            if( !n ){
+                while(root->right != NULL) root = root->right;
+                return root;
+            }
+            //Lewa gałąź nie jest pusta
+            if( n->left != NULL )
+                return n->left;
+            Node *succ = NULL;
+
+            // W innym przypadku
+            while (root != NULL)
+            {
+                if (n->NodePair.first < root->NodePair.first)
+                {
+                    root = root->left;
+                }
+                else if (n->NodePair.first > root->NodePair.first){
+                    succ = root;
+                    root = root->right;
+                }
+                else
+                    break;
+            }
+            return succ;
         }
     };
 
@@ -241,7 +420,7 @@ namespace aisdi {
         using reference = typename TreeMap::reference;
         using pointer = typename TreeMap::value_type *;
 
-        explicit Iterator() {}
+        explicit Iterator(const TreeMap *tt, Node* cnode):ConstIterator(tt,cnode) {}
 
         Iterator(const ConstIterator &other)
                 : ConstIterator(other) {}
@@ -280,19 +459,18 @@ namespace aisdi {
 
     template<typename KeyType, typename ValueType>
     struct TreeMap<KeyType, ValueType>::Node {
-        Node(KeyType tkey, ValueType tvalue) {
-            NodeKey = tkey;
-            NodeValue = tvalue;
+        friend class TreeMap;
+        Node(KeyType tkey, ValueType tvalue):NodePair(tkey, tvalue) {
             height = 1;
             right = NULL;
             left = NULL;
+            NodePair.second = tvalue;
         }
 
-        KeyType NodeKey;
-        ValueType NodeValue;
         Node *right;
         Node *left;
         unsigned char height;
+        std::pair<const KeyType, ValueType> NodePair;
     };
 
 }

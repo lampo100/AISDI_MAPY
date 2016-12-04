@@ -17,7 +17,7 @@ using std::begin;
 using std::end;
 
 BOOST_AUTO_TEST_SUITE(MapsTests)
-
+/*
 template <typename K>
 void thenMapContainsItems(const Map<K>& map,
                           const std::map<K, std::string>& expected)
@@ -593,5 +593,5 @@ BOOST_AUTO_TEST_CASE_TEMPLATE(GivenTwoMapsWithDifferentKeys_WhenComparingThem_Th
 
 // ConstIterator is tested via Iterator methods.
 // If Iterator methods are to be changed, then new ConstIterator tests are required.
-
+*/
 BOOST_AUTO_TEST_SUITE_END()
