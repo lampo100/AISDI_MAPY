@@ -540,7 +540,7 @@ BOOST_AUTO_TEST_CASE_TEMPLATE(GivenSingleItemMap_WhenRemovingItemByIterator_Then
 
   BOOST_CHECK(map.isEmpty());
 }
-
+/*
 BOOST_AUTO_TEST_CASE_TEMPLATE(GivenTwoEmptyMaps_WhenComparingThem_ThenTheyAreReportedAsEqual,
                               K,
                               TestedKeyTypes)
@@ -580,7 +580,7 @@ BOOST_AUTO_TEST_CASE_TEMPLATE(GivenTwoMapsWithDifferentValues_WhenComparingThem_
 
   BOOST_CHECK(map != other);
 }
-/*
+
 BOOST_AUTO_TEST_CASE_TEMPLATE(GivenTwoMapsWithDifferentKeys_WhenComparingThem_ThenTheyAreNotEqual,
                               K,
                               TestedKeyTypes)

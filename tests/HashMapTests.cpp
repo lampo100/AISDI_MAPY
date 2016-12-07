@@ -16,8 +16,8 @@ using Map = aisdi::HashMap<K, std::string>;
 using std::begin;
 using std::end;
 
-BOOST_AUTO_TEST_SUITE(MapsTests)
-/*
+BOOST_AUTO_TEST_SUITE(HashMapsTests)
+
 template <typename K>
 void thenMapContainsItems(const Map<K>& map,
                           const std::map<K, std::string>& expected)
@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_CASE_TEMPLATE(GivenEndIterator_WhenDecrementing_ThenIteratorPoin
   BOOST_CHECK(it == begin(map));
   BOOST_CHECK_EQUAL(it->first, 1);
 }
-
+/*
 BOOST_AUTO_TEST_CASE_TEMPLATE(GivenIterator_WhenPreDecrementing_ThenNewIteratorValueIsReturned,
                               K,
                               TestedKeyTypes)
