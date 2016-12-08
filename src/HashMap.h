@@ -44,29 +44,44 @@ namespace aisdi {
 
         HashMap() : count(0) {}
 
-        HashMap(std::initializer_list<value_type> list) {
-            (void) list; // disables "unused argument" warning, can be removed when method is implemented.
-            // throw std::runtime_error("TODO");
+        HashMap(std::initializer_list<value_type> list) : HashMap() {
+            for (auto i: list) {
+                operator[](i.first) = i.second;
+            }
         }
 
-        HashMap(const HashMap &other) {
-            (void) other;
-            //   throw std::runtime_error("TODO");
+        HashMap(const HashMap &other) : HashMap() {
+            for (auto i: other) {
+                operator[](i.first) = i.second;
+            }
         }
 
-        HashMap(HashMap &&other) {
-            (void) other;
-            //   throw std::runtime_error("TODO");
+        HashMap(HashMap &&other) : HashMap() {
+            for (auto i: other) {
+                operator[](i.first) = i.second;
+            }
+            clean(other);
         }
 
         HashMap &operator=(const HashMap &other) {
-            (void) other;
-            // throw std::runtime_error("TODO");
+            if (*this == other) return *this;
+            clean(*this);
+            if (!other.isEmpty())
+                for (auto i: other) {
+                    operator[](i.first) = i.second;
+                }
+            return *this;
         }
 
         HashMap &operator=(HashMap &&other) {
-            (void) other;
-            // throw std::runtime_error("TODO");
+            if (*this == other) return *this;
+            clean(*this);
+            if (!other.isEmpty())
+                for (auto i: other) {
+                    operator[](i.first) = i.second;
+                }
+            clean(other);
+            return *this;
         }
 
         bool isEmpty() const {
@@ -88,43 +103,76 @@ namespace aisdi {
         }
 
         const mapped_type &valueOf(const key_type &key) const {
-            (void) key;
-            //    throw std::runtime_error("TODO");
+            size_t index = get_index(key);
+            BaseNode *t = array[index].find(key);
+            if( !t ) throw std::out_of_range("Trying to fin nonexisting key.");
+            return static_cast<Node *>(t)->item.second;
+
         }
 
         mapped_type &valueOf(const key_type &key) {
-            (void) key;
-            //    throw std::runtime_error("TODO");
+            size_t index = get_index(key);
+            BaseNode *t = array[index].find(key);
+            if( !t ) throw std::out_of_range("Trying to fin nonexisting key.");
+            return static_cast<Node *>(t)->item.second;
         }
 
         const_iterator find(const key_type &key) const {
-            (void) key;
-            //     throw std::runtime_error("TODO");
+            std::hash<KeyType> h;
+            size_t index = h(key) % ARRAY_SIZE;
+            Node *result = array[index].find(key);
+            if (!result) return cend();
+            return ConstIterator(this, index, result);
         }
 
         iterator find(const key_type &key) {
-            (void) key;
-            throw std::runtime_error("TODO");
+            std::hash<KeyType> h;
+            size_t index = h(key) % ARRAY_SIZE;
+            Node *result = array[index].find(key);
+            if (!result) return end();
+            return Iterator(this, index, result);
         }
 
         void remove(const key_type &key) {
-            (void) key;
-            //     throw std::runtime_error("TODO");
+            std::hash<KeyType> h;
+            size_t index = h(key) % ARRAY_SIZE;
+            BaseNode *result = array[index].find(key);
+            if( !result ) throw std::out_of_range("Trying to erase nonexisting element.");
+            result->next->previous = result->previous;
+            result->previous->next = result->next;
+            delete result;
+            array[index].size--;
+            count--;
         }
 
         void remove(const const_iterator &it) {
-            (void) it;
-            //     throw std::runtime_error("TODO");
+            if(it == end()) throw std::out_of_range("Trying to erase end().");
+            BaseNode *result = it.node;
+            result->next->previous = result->previous;
+            result->previous->next = result->next;
+            delete result;
+            array[it.index].size--;
+            count--;
         }
 
         size_type getSize() const {
-            //        throw std::runtime_error("TODO");
             return count;
         }
 
         bool operator==(const HashMap &other) const {
-            (void) other;
-            //    throw std::runtime_error("TODO");
+            if((this->getSize() == 0) && (other.getSize() == 0)) return true;
+            if (isEmpty() != other.isEmpty()) return false;
+            std::hash<KeyType> h;
+            KeyType key;
+            ValueType val;
+            size_t index;
+            for (auto i: *this) {
+                key = i.first;
+                val = i.second;
+                index = h(key)%1024;
+                if(!other.array[index].find(key)) return false;
+                if (other.array[index].find(key)->item.second != val) return false;
+            }
             return true;
         }
 
@@ -190,9 +238,26 @@ namespace aisdi {
         List array[ARRAY_SIZE];
         size_t count;
 
-        size_t get_index(const key_type &key) {
+        size_t get_index(const key_type &key) const{
             std::hash<KeyType> h;
             return (h(key) % ARRAY_SIZE);
+        }
+
+        void clean(HashMap &target) {
+            for (size_t i = 0; i < ARRAY_SIZE; i++) {
+                if(target.array[i].size != 0){
+                    BaseNode *x = target.array[i].head->next;
+                    BaseNode *to_remove;
+                    while(x != target.array[i].tail){
+                        to_remove = x;
+                        x = to_remove->next;
+                        delete to_remove;
+                    }
+                }
+                target.array[i].head->next = target.array[i].tail;
+                target.array[i].tail->previous = target.array[i].head;
+            }
+            target.count = 0;
         }
 
     };
@@ -210,18 +275,26 @@ namespace aisdi {
         explicit ConstIterator(const HashMap *mmap, size_t tindex, BaseNode *tnode) :
                 map(mmap), index(tindex), node(tnode) {}
 
-        ConstIterator(const ConstIterator &other):ConstIterator(other.map, other.index, other.node) {}
+        ConstIterator(const ConstIterator &other) : ConstIterator(other.map, other.index, other.node) {}
 
         ConstIterator &operator++() {
             if (node == map->end().node)throw std::out_of_range("Trying to increment end()");
             if (node->next == map->array[index].tail) {
                 size_t next_index = index;
-                for (; next_index < ARRAY_SIZE; ++next_index) {
-                    if (map->array[next_index].size != 0) break;
+                bool is_next = false;
+                if (index != ARRAY_SIZE - 1) {
+                    next_index++;
+                    for (; next_index < ARRAY_SIZE; ++next_index) {
+                        if (map->array[next_index].size != 0) {
+                            is_next = true;
+                            break;
+                        }
+                    }
                 }
-                if (index != next_index) {
+
+                if (is_next == true) {
                     index = next_index;
-                    node = map->array[index].head;
+                    node = map->array[index].head->next;
                 } else {
                     node = node->next; //Powinno przejść na end().node
                 }
@@ -232,16 +305,24 @@ namespace aisdi {
         }
 
         ConstIterator operator++(int) {
-            ConstIterator result(*this);
             if (node == map->end().node)throw std::out_of_range("Trying to increment end()");
+            ConstIterator result(*this);
             if (node->next == map->array[index].tail) {
                 size_t next_index = index;
-                for (; next_index < ARRAY_SIZE; ++next_index) {
-                    if (map->array[next_index].size != 0) break;
+                bool is_next = false;
+                if (index != ARRAY_SIZE - 1) {
+                    next_index++;
+                    for (; next_index < ARRAY_SIZE; ++next_index) {
+                        if (map->array[next_index].size != 0) {
+                            is_next = true;
+                            break;
+                        }
+                    }
                 }
-                if (index != next_index) {
+
+                if (is_next) {
                     index = next_index;
-                    node = map->array[index].head;
+                    node = map->array[index].head->next;
                 } else {
                     node = node->next; //Powinno przejść na end().node
                 }
@@ -252,11 +333,58 @@ namespace aisdi {
         }
 
         ConstIterator &operator--() {
-            //   throw std::runtime_error("TODO");
+            if (node == map->begin().node)throw std::out_of_range("Trying to decrement begin()");
+            if (node->previous == map->array[index].head) {
+                size_t next_index = index;
+                bool is_next = false;
+                if (index != 0) {
+                    --next_index;
+                    for (; next_index >= 0; --next_index) {
+                        if (map->array[next_index].size != 0) {
+                            is_next = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (is_next) {
+                    index = next_index;
+                    node = map->array[index].head->next;
+                } else {
+                    node = node->previous; //Powinno przejść na begin().node
+                }
+            } else {
+                node = node->previous;
+            }
+            return *this;
         }
 
         ConstIterator operator--(int) {
-            //    throw std::runtime_error("TODO");
+            if (node == map->begin().node)throw std::out_of_range("Trying to decrement begin()");
+            ConstIterator result(*this);
+            if (node->previous == map->array[index].head) {
+                size_t next_index = index;
+                bool is_next = false;
+                if (index != 0) {
+                    --next_index;
+                    for (; next_index >= 0; --next_index) {
+                        if (map->array[next_index].size != 0) {
+                            is_next = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (is_next) {
+                    index = next_index;
+                    node = map->array[index].head->next;
+                } else {
+                    node = node->previous; //Powinno przejść na begin().node
+                }
+            } else {
+                node = node->previous;
+            }
+            return result;
         }
 
         reference operator*() const {
@@ -341,7 +469,7 @@ namespace aisdi {
             size = 0;
         }
 
-        Node *find(const KeyType key) {
+        Node *find(const KeyType key) const {//Szuka node'a o podanym kluczu
             BaseNode *result;
             result = head;
             while (result != tail) {

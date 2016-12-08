@@ -31,6 +31,9 @@ namespace aisdi {
         using const_iterator = ConstIterator;
 
         TreeMap(): root(NULL), count(0) {}
+        ~TreeMap(){
+            clean(root);
+        }
 
         TreeMap(std::initializer_list<value_type> list):TreeMap() {
             for(auto i : list) insert(i.first, i.second);

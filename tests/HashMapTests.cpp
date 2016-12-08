@@ -3,14 +3,14 @@
 #include <cstdint>
 #include <string>
 #include <map>
-
+#include <iostream>
 #include <boost/test/unit_test.hpp>
 
 #include <boost/mpl/list.hpp>
 
 using TestedKeyTypes = boost::mpl::list<std::int32_t, std::uint64_t>;
 
-template <typename K>
+template<typename K>
 using Map = aisdi::HashMap<K, std::string>;
 
 using std::begin;
@@ -18,22 +18,20 @@ using std::end;
 
 BOOST_AUTO_TEST_SUITE(HashMapsTests)
 
-template <typename K>
-void thenMapContainsItems(const Map<K>& map,
-                          const std::map<K, std::string>& expected)
-{
-  BOOST_CHECK_EQUAL(map.getSize(), expected.size());
+    template<typename K>
+    void thenMapContainsItems(const Map<K> &map,
+                              const std::map<K, std::string> &expected) {
+        BOOST_CHECK_EQUAL(map.getSize(), expected.size());
 
-  for (const auto& item : expected)
-  {
-    const auto it = map.find(item.first);
-    BOOST_REQUIRE_MESSAGE(it != end(map), "Missing required item with key: " << item.first);
-    BOOST_CHECK_MESSAGE(it->second == item.second,
-                        "Wrong value in map for key: " << item.first
-                        << " (expected: \"" << item.second
-                        << "\" got: \"" << it->second << "\")");
-  }
-}
+        for (const auto &item : expected) {
+            const auto it = map.find(item.first);
+            BOOST_REQUIRE_MESSAGE(it != end(map), "Missing required item with key: " << item.first);
+            BOOST_CHECK_MESSAGE(it->second == item.second,
+                                "Wrong value in map for key: " << item.first
+                                                               << " (expected: \"" << item.second
+                                                               << "\" got: \"" << it->second << "\")");
+        }
+    }
 
 BOOST_AUTO_TEST_CASE_TEMPLATE(GivenMap_WhenCreatedWithDefaultConstructor_ThenItIsEmpty,
                               K,
@@ -145,7 +143,7 @@ BOOST_AUTO_TEST_CASE_TEMPLATE(GivenEndIterator_WhenDecrementing_ThenIteratorPoin
   BOOST_CHECK(it == begin(map));
   BOOST_CHECK_EQUAL(it->first, 1);
 }
-/*
+
 BOOST_AUTO_TEST_CASE_TEMPLATE(GivenIterator_WhenPreDecrementing_ThenNewIteratorValueIsReturned,
                               K,
                               TestedKeyTypes)
@@ -329,7 +327,8 @@ BOOST_AUTO_TEST_CASE_TEMPLATE(GivenNonEmptyMap_WhenCreatingCopy_ThenAllItemsAreC
                               TestedKeyTypes)
 {
   Map<K> map = { { 753, "Rome" }, { 1789, "Paris" } };
-  const Map<K> other{map};
+
+    const Map<K> other{map};
 
   map[1410] = "Grunwald";
 
@@ -348,16 +347,16 @@ BOOST_AUTO_TEST_CASE_TEMPLATE(GivenEmptyMap_WhenMovingToOther_ThenBothMapsAreEmp
   BOOST_CHECK(other.isEmpty());
 }
 
-BOOST_AUTO_TEST_CASE_TEMPLATE(GivenNonEmptyMap_WhenMovingToOther_ThenAllItemsAreMoved,
-                              K,
-                              TestedKeyTypes)
-{
-  Map<K> map = { { 753, "Rome" }, { 1789, "Paris" } };
-  const Map<K> other{std::move(map)};
-
-  thenMapContainsItems(other, { { 753, "Rome" }, { 1789, "Paris" } });
-  BOOST_CHECK(map.isEmpty());
-}
+    BOOST_AUTO_TEST_CASE_TEMPLATE(GivenNonEmptyMap_WhenMovingToOther_ThenAllItemsAreMoved,
+                                  K,
+                                  TestedKeyTypes) {
+        Map<K> map = {{753,  "Rome"},
+                      {1789, "Paris"}};
+        const Map<K> other{std::move(map)};
+        thenMapContainsItems(other, {{753,  "Rome"},
+                                     {1789, "Paris"}});
+        BOOST_CHECK(map.isEmpty());
+    }
 
 BOOST_AUTO_TEST_CASE_TEMPLATE(GivenEmptyMap_WhenAssigningToOther_ThenOtherMapIsEmpty,
                               K,
@@ -593,5 +592,5 @@ BOOST_AUTO_TEST_CASE_TEMPLATE(GivenTwoMapsWithDifferentKeys_WhenComparingThem_Th
 
 // ConstIterator is tested via Iterator methods.
 // If Iterator methods are to be changed, then new ConstIterator tests are required.
-*/
+
 BOOST_AUTO_TEST_SUITE_END()

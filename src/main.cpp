@@ -8,7 +8,7 @@ namespace
 {
 
 template <typename K, typename V>
-using Map = aisdi::Map<K, V>;
+using Map = aisdi::TreeMap<K, V>;
 
 void perfomTest()
 {
