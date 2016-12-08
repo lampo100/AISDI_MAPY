@@ -1,1 +1,1 @@
-/usr/bin/c++    --std=c++11 -Wall -pedantic -Wextra -Werror -O3 -DNDEBUG    CMakeFiles/aisdiMaps.dir/main.cpp.o  -o aisdiMaps -rdynamic 
+/usr/bin/c++    --std=c++14 -Wall -pedantic -Wextra -Werror -g -O3 -DNDEBUG    CMakeFiles/aisdiMaps.dir/main.cpp.o  -o aisdiMaps -rdynamic 

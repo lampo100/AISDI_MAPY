@@ -4,14 +4,14 @@
 
 
 # Configuration directories and files
-SourceDirectory: /home/mion/s/143/kkamins1/Desktop/Mapy
-BuildDirectory: /home/mion/s/143/kkamins1/Desktop/Mapy/Debug
+SourceDirectory: /home/kacper/AISDI/Mapy
+BuildDirectory: /home/kacper/AISDI/Mapy/Debug
 
 # Where to place the cost data store
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: lab011
+Site: kacper-laptop
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
 BuildName: Linux-c++
@@ -33,17 +33,21 @@ ScpCommand: /usr/bin/scp
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/usr/bin/cmake" "/home/mion/s/143/kkamins1/Desktop/Mapy"
-MakeCommand: /usr/bin/make -i
+ConfigureCommand: "/usr/bin/cmake" "/home/kacper/AISDI/Mapy"
+MakeCommand: /usr/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
+
+# version control
+UpdateVersionOnly: 
 
 # CVS options
 # Default is "-d -P -A"
-CVSCommand: CVSCOMMAND-NOTFOUND
+CVSCommand: /usr/bin/cvs
 CVSUpdateOptions: -d -A -P
 
 # Subversion options
-SVNCommand: /usr/bin/svn
+SVNCommand: SVNCOMMAND-NOTFOUND
+SVNOptions: 
 SVNUpdateOptions: 
 
 # Git options
@@ -51,22 +55,34 @@ GITCommand: /usr/bin/git
 GITUpdateOptions: 
 GITUpdateCustom: 
 
+# Perforce options
+P4Command: P4COMMAND-NOTFOUND
+P4Client: 
+P4Options: 
+P4UpdateOptions: 
+P4UpdateCustom: 
+
 # Generic update command
-UpdateCommand: 
+UpdateCommand: /usr/bin/git
 UpdateOptions: 
-UpdateType: 
+UpdateType: git
 
 # Compiler info
 Compiler: /usr/bin/c++
 
-# Dynamic analysis and coverage
+# Dynamic analysis (MemCheck)
 PurifyCommand: 
 ValgrindCommand: 
 ValgrindCommandOptions: 
+MemoryCheckType: 
+MemoryCheckSanitizerOptions: 
 MemoryCheckCommand: /usr/bin/valgrind
 MemoryCheckCommandOptions: 
 MemoryCheckSuppressionFile: 
+
+# Coverage
 CoverageCommand: /usr/bin/gcov
+CoverageExtraFlags: -l
 
 # Cluster commands
 SlurmBatchCommand: SLURM_SBATCH_COMMAND-NOTFOUND
@@ -84,3 +100,7 @@ CurlOptions:
 # warning, if you add new options here that have to do with submit,
 # you have to update cmCTestSubmitCommand.cxx
 
+# For CTest submissions that timeout, these options
+# specify behavior for retrying the submission
+CTestSubmitRetryDelay: 5
+CTestSubmitRetryCount: 3

@@ -1,6 +1,6 @@
 # CMake generated Testfile for 
-# Source directory: /home/mion/s/143/kkamins1/Desktop/Mapy/src
-# Build directory: /home/mion/s/143/kkamins1/Desktop/Mapy/Debug/src
+# Source directory: /home/kacper/AISDI/Mapy/src
+# Build directory: /home/kacper/AISDI/Mapy/Debug/src
 # 
-# This file includes the relevent testing commands required for 
+# This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.

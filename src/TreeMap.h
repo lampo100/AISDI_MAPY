@@ -76,8 +76,7 @@ namespace aisdi {
         mapped_type &operator[](const key_type &key) {
             Node *current = findNode(key);
             if( !current ){
-                ValueType i;
-                insert(key, i);
+                insert(key, ValueType());
                 current = findNode(key);
                 return current->NodePair.second;
             }
@@ -128,7 +127,14 @@ namespace aisdi {
         }
 
         bool operator==(const TreeMap &other) const {
-            return (root == other.root);
+            if ((this->getSize() == 0) && (other.getSize() == 0)) return true;
+            if (this->getSize() != other.getSize()) return false;
+
+            for (auto i: other) {
+                if (!(this->findNode(i.first))) return false;
+                if (((this->findNode(i.first))->NodePair.second) != i.second) return false;
+            }
+            return true;
         }
 
         bool operator!=(const TreeMap &other) const {

@@ -8,159 +8,201 @@
       <Option virtualFolders="CMake Files\;CMake Files\src\;CMake Files\tests\;" />
       <Build>
       <Target title="all">
-         <Option working_dir="/home/mion/s/143/kkamins1/Desktop/Mapy/Debug" />
+         <Option working_dir="/home/kacper/AISDI/Mapy/Debug" />
          <Option type="4" />
          <MakeCommands>
-            <Build command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; all" />
-            <CompileFile command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; &quot;$file&quot;" />
-            <Clean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; clean" />
-            <DistClean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; clean" />
+            <Build command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 all" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 clean" />
          </MakeCommands>
       </Target>
-      <Target title="Continuous">
-         <Option working_dir="/home/mion/s/143/kkamins1/Desktop/Mapy/Debug" />
+      <Target title="edit_cache">
+         <Option working_dir="/home/kacper/AISDI/Mapy/Debug" />
          <Option type="4" />
          <MakeCommands>
-            <Build command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; Continuous" />
-            <CompileFile command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; &quot;$file&quot;" />
-            <Clean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; clean" />
-            <DistClean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; clean" />
-         </MakeCommands>
-      </Target>
-      <Target title="Experimental">
-         <Option working_dir="/home/mion/s/143/kkamins1/Desktop/Mapy/Debug" />
-         <Option type="4" />
-         <MakeCommands>
-            <Build command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; Experimental" />
-            <CompileFile command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; &quot;$file&quot;" />
-            <Clean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; clean" />
-            <DistClean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; clean" />
-         </MakeCommands>
-      </Target>
-      <Target title="Nightly">
-         <Option working_dir="/home/mion/s/143/kkamins1/Desktop/Mapy/Debug" />
-         <Option type="4" />
-         <MakeCommands>
-            <Build command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; Nightly" />
-            <CompileFile command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; &quot;$file&quot;" />
-            <Clean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; clean" />
-            <DistClean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; clean" />
+            <Build command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 edit_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 clean" />
          </MakeCommands>
       </Target>
       <Target title="rebuild_cache">
-         <Option working_dir="/home/mion/s/143/kkamins1/Desktop/Mapy/Debug" />
+         <Option working_dir="/home/kacper/AISDI/Mapy/Debug" />
          <Option type="4" />
          <MakeCommands>
-            <Build command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; rebuild_cache" />
-            <CompileFile command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; &quot;$file&quot;" />
-            <Clean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; clean" />
-            <DistClean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; clean" />
+            <Build command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 rebuild_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="Nightly">
+         <Option working_dir="/home/kacper/AISDI/Mapy/Debug" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 Nightly" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="Continuous">
+         <Option working_dir="/home/kacper/AISDI/Mapy/Debug" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 Continuous" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="Experimental">
+         <Option working_dir="/home/kacper/AISDI/Mapy/Debug" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 Experimental" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 clean" />
          </MakeCommands>
       </Target>
       <Target title="test">
-         <Option working_dir="/home/mion/s/143/kkamins1/Desktop/Mapy/Debug" />
+         <Option working_dir="/home/kacper/AISDI/Mapy/Debug" />
          <Option type="4" />
          <MakeCommands>
-            <Build command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; test" />
-            <CompileFile command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; &quot;$file&quot;" />
-            <Clean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; clean" />
-            <DistClean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/Makefile&quot; clean" />
+            <Build command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 test" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/Makefile&quot;  VERBOSE=1 clean" />
          </MakeCommands>
       </Target>
       <Target title="aisdiMaps">
-         <Option output="/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/src/aisdiMaps" prefix_auto="0" extension_auto="0" />
-         <Option working_dir="/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/src" />
+         <Option output="/home/kacper/AISDI/Mapy/Debug/src/aisdiMaps" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/kacper/AISDI/Mapy/Debug/src" />
          <Option object_output="./" />
          <Option type="1" />
          <Option compiler="gcc" />
          <Compiler>
-            <Add directory="/home/mion/s/143/kkamins1/Desktop/Mapy/src" />
+            <Add directory="/home/kacper/AISDI/Mapy/src" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/5" />
+            <Add directory="/usr/include/c++/5/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/5" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+            <Add directory="/usr/local/include" />
          </Compiler>
          <MakeCommands>
-            <Build command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/src/Makefile&quot; aisdiMaps" />
-            <CompileFile command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/src/Makefile&quot; &quot;$file&quot;" />
-            <Clean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/src/Makefile&quot; clean" />
-            <DistClean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/src/Makefile&quot; clean" />
+            <Build command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/src/Makefile&quot;  VERBOSE=1 aisdiMaps" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/src/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/src/Makefile&quot;  VERBOSE=1 clean" />
          </MakeCommands>
       </Target>
       <Target title="aisdiMaps/fast">
-         <Option output="/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/src/aisdiMaps" prefix_auto="0" extension_auto="0" />
-         <Option working_dir="/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/src" />
+         <Option output="/home/kacper/AISDI/Mapy/Debug/src/aisdiMaps" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/kacper/AISDI/Mapy/Debug/src" />
          <Option object_output="./" />
          <Option type="1" />
          <Option compiler="gcc" />
          <Compiler>
-            <Add directory="/home/mion/s/143/kkamins1/Desktop/Mapy/src" />
+            <Add directory="/home/kacper/AISDI/Mapy/src" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/5" />
+            <Add directory="/usr/include/c++/5/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/5" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+            <Add directory="/usr/local/include" />
          </Compiler>
          <MakeCommands>
-            <Build command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/src/Makefile&quot; aisdiMaps/fast" />
-            <CompileFile command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/src/Makefile&quot; &quot;$file&quot;" />
-            <Clean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/src/Makefile&quot; clean" />
-            <DistClean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/src/Makefile&quot; clean" />
+            <Build command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/src/Makefile&quot;  VERBOSE=1 aisdiMaps/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/src/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/src/Makefile&quot;  VERBOSE=1 clean" />
          </MakeCommands>
       </Target>
       <Target title="aisdiMapsTests">
-         <Option output="/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests/aisdiMapsTests" prefix_auto="0" extension_auto="0" />
-         <Option working_dir="/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests" />
+         <Option output="/home/kacper/AISDI/Mapy/Debug/tests/aisdiMapsTests" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/kacper/AISDI/Mapy/Debug/tests" />
          <Option object_output="./" />
          <Option type="1" />
          <Option compiler="gcc" />
          <Compiler>
-            <Add directory="/home/mion/s/143/kkamins1/Desktop/Mapy/src" />
+            <Add directory="/home/kacper/AISDI/Mapy/src" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/5" />
+            <Add directory="/usr/include/c++/5/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/5" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+            <Add directory="/usr/local/include" />
          </Compiler>
          <MakeCommands>
-            <Build command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests/Makefile&quot; aisdiMapsTests" />
-            <CompileFile command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests/Makefile&quot; &quot;$file&quot;" />
-            <Clean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests/Makefile&quot; clean" />
-            <DistClean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests/Makefile&quot; clean" />
+            <Build command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/tests/Makefile&quot;  VERBOSE=1 aisdiMapsTests" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/tests/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/tests/Makefile&quot;  VERBOSE=1 clean" />
          </MakeCommands>
       </Target>
       <Target title="aisdiMapsTests/fast">
-         <Option output="/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests/aisdiMapsTests" prefix_auto="0" extension_auto="0" />
-         <Option working_dir="/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests" />
+         <Option output="/home/kacper/AISDI/Mapy/Debug/tests/aisdiMapsTests" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/kacper/AISDI/Mapy/Debug/tests" />
          <Option object_output="./" />
          <Option type="1" />
          <Option compiler="gcc" />
          <Compiler>
-            <Add directory="/home/mion/s/143/kkamins1/Desktop/Mapy/src" />
+            <Add directory="/home/kacper/AISDI/Mapy/src" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/5" />
+            <Add directory="/usr/include/c++/5/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/5" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+            <Add directory="/usr/local/include" />
          </Compiler>
          <MakeCommands>
-            <Build command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests/Makefile&quot; aisdiMapsTests/fast" />
-            <CompileFile command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests/Makefile&quot; &quot;$file&quot;" />
-            <Clean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests/Makefile&quot; clean" />
-            <DistClean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests/Makefile&quot; clean" />
+            <Build command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/tests/Makefile&quot;  VERBOSE=1 aisdiMapsTests/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/tests/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/tests/Makefile&quot;  VERBOSE=1 clean" />
          </MakeCommands>
       </Target>
       <Target title="check">
-         <Option working_dir="/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests" />
+         <Option working_dir="/home/kacper/AISDI/Mapy/Debug/tests" />
          <Option type="4" />
          <MakeCommands>
-            <Build command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests/Makefile&quot; check" />
-            <CompileFile command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests/Makefile&quot; &quot;$file&quot;" />
-            <Clean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests/Makefile&quot; clean" />
-            <DistClean command="/usr/bin/make -f &quot;/home/mion/s/143/kkamins1/Desktop/Mapy/Debug/tests/Makefile&quot; clean" />
+            <Build command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/tests/Makefile&quot;  VERBOSE=1 check" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/tests/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/kacper/AISDI/Mapy/Debug/tests/Makefile&quot;  VERBOSE=1 clean" />
          </MakeCommands>
       </Target>
       </Build>
-      <Unit filename="/home/mion/s/143/kkamins1/Desktop/Mapy/src/main.cpp">
+      <Unit filename="/home/kacper/AISDI/Mapy/src/main.cpp">
       </Unit>
-      <Unit filename="/home/mion/s/143/kkamins1/Desktop/Mapy/tests/HashMapTests.cpp">
+      <Unit filename="/home/kacper/AISDI/Mapy/tests/HashMapTests.cpp">
       </Unit>
-      <Unit filename="/home/mion/s/143/kkamins1/Desktop/Mapy/tests/TreeMapTests.cpp">
+      <Unit filename="/home/kacper/AISDI/Mapy/tests/TreeMapTests.cpp">
       </Unit>
-      <Unit filename="/home/mion/s/143/kkamins1/Desktop/Mapy/tests/test_main.cpp">
+      <Unit filename="/home/kacper/AISDI/Mapy/tests/test_main.cpp">
       </Unit>
-      <Unit filename="/home/mion/s/143/kkamins1/Desktop/Mapy/src/HashMap.h">
+      <Unit filename="/home/kacper/AISDI/Mapy/src/HashMap.h">
       </Unit>
-      <Unit filename="/home/mion/s/143/kkamins1/Desktop/Mapy/src/TreeMap.h">
+      <Unit filename="/home/kacper/AISDI/Mapy/src/TreeMap.h">
       </Unit>
-      <Unit filename="/home/mion/s/143/kkamins1/Desktop/Mapy/CMakeLists.txt">
+      <Unit filename="/home/kacper/AISDI/Mapy/CMakeLists.txt">
           <Option virtualFolder="CMake Files\" />
       </Unit>
-      <Unit filename="/home/mion/s/143/kkamins1/Desktop/Mapy/src/CMakeLists.txt">
+      <Unit filename="/home/kacper/AISDI/Mapy/src/CMakeLists.txt">
           <Option virtualFolder="CMake Files\src\" />
       </Unit>
-      <Unit filename="/home/mion/s/143/kkamins1/Desktop/Mapy/tests/CMakeLists.txt">
+      <Unit filename="/home/kacper/AISDI/Mapy/tests/CMakeLists.txt">
           <Option virtualFolder="CMake Files\tests\" />
       </Unit>
    </Project>

@@ -161,7 +161,7 @@ namespace aisdi {
 
         bool operator==(const HashMap &other) const {
             if((this->getSize() == 0) && (other.getSize() == 0)) return true;
-            if (isEmpty() != other.isEmpty()) return false;
+            if (getSize() != other.getSize()) return false;
             std::hash<KeyType> h;
             KeyType key;
             ValueType val;

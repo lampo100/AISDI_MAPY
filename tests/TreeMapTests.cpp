@@ -1,7 +1,5 @@
 #include <TreeMap.h>
 
-#include <cstdint>
-#include <string>
 #include <map>
 
 #include <boost/test/unit_test.hpp>
@@ -540,8 +538,8 @@ BOOST_AUTO_TEST_CASE_TEMPLATE(GivenSingleItemMap_WhenRemovingItemByIterator_Then
 
   BOOST_CHECK(map.isEmpty());
 }
-/*
-BOOST_AUTO_TEST_CASE_TEMPLATE(GivenTwoEmptyMaps_WhenComparingThem_ThenTheyAreReportedAsEqual,
+
+    BOOST_AUTO_TEST_CASE_TEMPLATE(GivenTwoEmptyMaps_WhenComparingThem_ThenTheyAreReportedAsEqual,
                               K,
                               TestedKeyTypes)
 {
@@ -590,7 +588,7 @@ BOOST_AUTO_TEST_CASE_TEMPLATE(GivenTwoMapsWithDifferentKeys_WhenComparingThem_Th
 
   BOOST_CHECK(map != other);
 }
-*/
+
 // ConstIterator is tested via Iterator methods.
 // If Iterator methods are to be changed, then new ConstIterator tests are required.
 
